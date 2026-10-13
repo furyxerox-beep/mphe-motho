@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 
 function Discover() {
   const [i, setI] = useState(0);
-  const p = profiles[i % profiles.length];
+  const p = profiles[i % profiles.length]!;
   const next = () => setI((n) => n + 1);
 
   return (
