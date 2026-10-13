@@ -1,0 +1,12 @@
+{
+  "name": "Mphe-Motho",
+  "short_name": "Mphe-Motho",
+  "description": "Global hearts, local connections.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2a0a12",
+  "theme_color": "#6b1023",
+  "icons": [
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
