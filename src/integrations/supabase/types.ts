@@ -14,13 +14,224 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      event_rsvps: {
+        Row: {
+          created_at: string
+          event_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_rsvps_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_rsvps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          capacity: number
+          id: string
+          region: string
+          starts_at: string
+          title: string
+        }
+        Insert: {
+          capacity?: number
+          id?: string
+          region: string
+          starts_at: string
+          title: string
+        }
+        Update: {
+          capacity?: number
+          id?: string
+          region?: string
+          starts_at?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      likes: {
+        Row: {
+          created_at: string
+          liked: string
+          liker: string
+        }
+        Insert: {
+          created_at?: string
+          liked: string
+          liker: string
+        }
+        Update: {
+          created_at?: string
+          liked?: string
+          liker?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "likes_liked_fkey"
+            columns: ["liked"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "likes_liker_fkey"
+            columns: ["liker"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          read_at: string | null
+          receiver: string
+          sender: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver: string
+          sender: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver?: string
+          sender?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_receiver_fkey"
+            columns: ["receiver"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_sender_fkey"
+            columns: ["sender"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      private_details: {
+        Row: {
+          created_at: string
+          phone: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          phone: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          phone?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "private_details_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_path: string | null
+          bio: string | null
+          birthdate: string | null
+          city: string | null
+          created_at: string
+          display_name: string
+          gender: string | null
+          id: string
+          interested_in: string | null
+          interests: string[]
+          job: string | null
+          last_active: string
+          lat: number | null
+          lng: number | null
+          province: string | null
+        }
+        Insert: {
+          avatar_path?: string | null
+          bio?: string | null
+          birthdate?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string
+          gender?: string | null
+          id: string
+          interested_in?: string | null
+          interests?: string[]
+          job?: string | null
+          last_active?: string
+          lat?: number | null
+          lng?: number | null
+          province?: string | null
+        }
+        Update: {
+          avatar_path?: string | null
+          bio?: string | null
+          birthdate?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string
+          gender?: string | null
+          id?: string
+          interested_in?: string | null
+          interests?: string[]
+          job?: string | null
+          last_active?: string
+          lat?: number | null
+          lng?: number | null
+          province?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_match: { Args: { a: string; b: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
