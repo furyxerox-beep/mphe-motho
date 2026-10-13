@@ -1,72 +1,41 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Heart, X, MapPin } from "lucide-react";
-import { toast } from "sonner";
-import { AppShell, SectionTitle } from "@/components/AppShell";
-import { profiles } from "@/lib/data";
+import { Heart, ShieldCheck, MapPin, MessageCircle } from "lucide-react";
+import neo from "@/assets/neo.jpg";
+import thandi from "@/assets/thandi.jpg";
+import sipho from "@/assets/sipho.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Discover singles — Mphe-Motho" },
-      { name: "description", content: "Discover verified singles in your province with Mphe-Motho." },
-      { property: "og:title", content: "Discover singles — Mphe-Motho" },
-      { property: "og:description", content: "Global hearts, local connections." },
+      { title: "Mphe-Motho — Dating for Mzansi" },
+      { name: "description", content: "Meet verified South African singles near you. Global hearts, local connections." },
+      { property: "og:title", content: "Mphe-Motho — Dating for Mzansi" },
+      { property: "og:description", content: "Meet verified South African singles near you." },
     ],
   }),
-  component: Discover,
+  component: Landing,
 });
 
-function Discover() {
-  const [i, setI] = useState(0);
-  const p = profiles[i % profiles.length]!;
-  const next = () => setI((n) => n + 1);
-
+function Landing() {
   return (
-    <AppShell>
-      <article key={p.id} className="animate-in fade-in zoom-in-95 overflow-hidden rounded-3xl border border-gold/40 bg-card shadow-glow">
-        <div className="relative aspect-[3/4]">
-          <img src={p.photo} alt={p.name} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-card-fade" />
-          <div className="absolute inset-x-0 bottom-0 p-5">
-            <div className="flex items-end justify-between">
-              <div>
-                <h3 className="font-display text-3xl text-gold">{p.name}, {p.age}</h3>
-                <p className="text-cream/90">{p.job}</p>
-                <p className="flex items-center gap-1 text-sm text-cream/70"><MapPin className="h-3.5 w-3.5" />{p.location}</p>
-              </div>
-              <div className="text-right">
-                <p className="font-display text-3xl text-gold">{p.match}%</p>
-                <p className="text-xs text-cream/70">Match</p>
-              </div>
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {p.interests.map((t) => (
-                <span key={t} className="rounded-full border border-gold/40 px-3 py-1 text-xs text-cream">{t}</span>
-              ))}
-            </div>
-          </div>
+    <div className="min-h-screen bg-romance">
+      <div className="mx-auto flex min-h-screen max-w-md flex-col px-6 py-10">
+        <h1 className="text-center font-display text-4xl text-gold-gradient">Mphe-Motho</h1>
+        <p className="mt-1 text-center text-sm tracking-widest text-cream/70">GLOBAL HEARTS, LOCAL CONNECTIONS</p>
+        <div className="relative mx-auto mt-10 h-72 w-full">
+          <img src={thandi} alt="" className="absolute left-0 top-6 h-56 w-40 -rotate-6 rounded-3xl border-2 border-gold/50 object-cover shadow-glow" />
+          <img src={sipho} alt="" className="absolute right-0 top-6 h-56 w-40 rotate-6 rounded-3xl border-2 border-gold/50 object-cover shadow-glow" />
+          <img src={neo} alt="" className="absolute left-1/2 top-0 h-64 w-44 -translate-x-1/2 rounded-3xl border-2 border-gold object-cover shadow-glow" />
         </div>
-        <div className="flex gap-3 p-4">
-          <button onClick={next} aria-label="Pass" className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/40 text-gold"><X /></button>
-          <button
-            onClick={() => { toast.success(`Connection request sent to ${p.name}`); next(); }}
-            className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-gradient font-semibold text-cream shadow-glow"
-          >
-            <Heart className="h-5 w-5 fill-gold text-gold" /> Let's Connect
-          </button>
-        </div>
-      </article>
-
-      <SectionTitle>More matches in Gauteng</SectionTitle>
-      <div className="flex gap-3 overflow-x-auto pb-2">
-        {profiles.map((m) => (
-          <Link to="/matches" key={m.id} className="relative w-32 shrink-0 overflow-hidden rounded-2xl border border-gold/30">
-            <img src={m.photo} alt={m.name} className="aspect-[3/4] w-full object-cover" loading="lazy" />
-            <span className="absolute inset-x-0 bottom-0 bg-card-fade p-2 text-sm text-cream">{m.name}</span>
-          </Link>
-        ))}
+        <ul className="mt-8 space-y-3 text-sm text-cream/90">
+          <li className="flex gap-3"><MapPin className="h-5 w-5 text-gold" />Auto-matched with singles near you, across all 9 provinces</li>
+          <li className="flex gap-3"><MessageCircle className="h-5 w-5 text-gold" />Live private chat with your matches</li>
+          <li className="flex gap-3"><ShieldCheck className="h-5 w-5 text-gold" />South African numbers only, verified email</li>
+        </ul>
+        <Link to="/auth" className="mt-auto flex items-center justify-center gap-2 rounded-full bg-primary-gradient py-4 font-semibold text-cream shadow-glow">
+          <Heart className="h-5 w-5 fill-gold text-gold" /> Get started
+        </Link>
       </div>
-    </AppShell>
+    </div>
   );
 }
