@@ -34,7 +34,7 @@ function Events() {
     const { error } = joined
       ? await supabase.from("event_rsvps").delete().eq("event_id", id).eq("user_id", me.id)
       : await supabase.from("event_rsvps").insert({ event_id: id, user_id: me.id });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(joined ? "RSVP cancelled" : `You're in: ${title}`);
     qc.invalidateQueries({ queryKey: ["events"] });
   }

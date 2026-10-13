@@ -60,7 +60,7 @@ function Chat() {
     if (!body.trim() || !me) return;
     setText("");
     const { error } = await supabase.from("messages").insert({ sender: me.id, receiver: id, body: body.trim() });
-    if (error) return toast.error("Couldn't send — you can only message your matches.");
+    if (error) { toast.error("Couldn't send — you can only message your matches."); return; }
     qc.invalidateQueries({ queryKey: key });
   }
 
