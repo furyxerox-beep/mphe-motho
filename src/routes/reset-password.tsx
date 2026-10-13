@@ -22,9 +22,9 @@ function Reset() {
   const issues = passwordIssues(pw);
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (issues.length) return toast.error("Password needs " + issues.join(", "));
+    if (issues.length) { toast.error("Password needs " + issues.join(", ")); return; }
     const { error } = await supabase.auth.updateUser({ password: pw });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Password updated");
     navigate({ to: "/discover" });
   }

@@ -32,7 +32,7 @@ function Discover() {
   const top = feed[0];
   async function like(id: string, name: string) {
     const { error } = await supabase.from("likes").insert({ liker: me!.id, liked: id });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (likes?.some((l) => l.liker === id && l.liked === me!.id)) toast.success(`💛 It's a match with ${name}!`);
     else toast.success(`Connection request sent to ${name}`);
     qc.invalidateQueries({ queryKey: ["likes"] });
@@ -40,12 +40,11 @@ function Discover() {
   const [skipped, setSkipped] = [null, (id: string) => qc.setQueryData(["profiles"], (old: typeof profiles) => old?.filter((p) => p.id !== id))];
   void skipped;
 
-  if (me && (!me.avatar_path || !me.interests.length))
-    var nudge = (
+  const nudge = me && (!me.avatar_path || !me.interests.length) ? (
       <Link to="/profile" className="mb-4 block rounded-2xl border border-gold/40 bg-card/20 p-4 text-sm text-cream">
         ✨ Complete your profile (photo & interests) to get better matches →
       </Link>
-    );
+    ) : null;
 
   return (
     <AppShell>

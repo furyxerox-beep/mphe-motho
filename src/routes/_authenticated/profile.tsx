@@ -39,7 +39,7 @@ function MyProfile() {
     if (!me) return;
     const path = `${me.id}/${Date.now()}-${file.name.replace(/[^\w.]/g, "")}`;
     const { error } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await supabase.from("profiles").update({ avatar_path: path }).eq("id", me.id);
     qc.invalidateQueries({ queryKey: ["me"] });
     qc.invalidateQueries({ queryKey: ["profiles"] });
@@ -51,10 +51,10 @@ function MyProfile() {
     if (!me) return;
     if (f.birthdate) {
       const a = (Date.now() - new Date(f.birthdate).getTime()) / 31557600000;
-      if (a < 18) return toast.error("You must be 18 or older.");
+      if (a < 18) { toast.error("You must be 18 or older."); return; }
     }
     const phone = normalizePhone(f.phone);
-    if (!phone) return toast.error("Use a South African mobile number.");
+    if (!phone) { toast.error("Use a South African mobile number."); return; }
     setSaving(true);
     const { error } = await supabase.from("profiles").update({
       display_name: f.display_name.trim() || "Member", birthdate: f.birthdate || null, gender: f.gender || null, interested_in: f.interested_in || null,
@@ -63,7 +63,7 @@ function MyProfile() {
     }).eq("id", me.id);
     const { error: e2 } = phone !== priv?.phone ? await supabase.from("private_details").update({ phone }).eq("user_id", me.id) : { error: null };
     setSaving(false);
-    if (error || e2) return toast.error((error ?? e2)!.message);
+    if (error || e2) { toast.error((error ?? e2)!.message); return; }
     qc.invalidateQueries();
     toast.success("Profile saved");
   }

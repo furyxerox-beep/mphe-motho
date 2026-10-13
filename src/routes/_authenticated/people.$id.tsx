@@ -30,7 +30,7 @@ function Person() {
     const { error } = iLiked
       ? await supabase.from("likes").delete().eq("liker", me!.id).eq("liked", id)
       : await supabase.from("likes").insert({ liker: me!.id, liked: id });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["likes"] });
   }
 
