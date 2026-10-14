@@ -13,10 +13,15 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedChomaRouteImport } from './routes/_authenticated/choma'
+import { Route as AuthenticatedDatePlannerRouteImport } from './routes/_authenticated/date-planner'
 import { Route as AuthenticatedDiscoverRouteImport } from './routes/_authenticated/discover'
 import { Route as AuthenticatedEventsRouteImport } from './routes/_authenticated/events'
+import { Route as AuthenticatedLobolaRouteImport } from './routes/_authenticated/lobola'
+import { Route as AuthenticatedMatchCountdownRouteImport } from './routes/_authenticated/match-countdown'
 import { Route as AuthenticatedMatchesRouteImport } from './routes/_authenticated/matches'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedVoiceIntroRouteImport } from './routes/_authenticated/voice-intro'
 import { Route as AuthenticatedMessagesIndexRouteImport } from './routes/_authenticated/messages.index'
 import { Route as AuthenticatedMessagesIdRouteImport } from './routes/_authenticated/messages.$id'
 import { Route as AuthenticatedPeopleIdRouteImport } from './routes/_authenticated/people.$id'
@@ -40,6 +45,17 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedChomaRoute = AuthenticatedChomaRouteImport.update({
+  id: '/choma',
+  path: '/choma',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDatePlannerRoute =
+  AuthenticatedDatePlannerRouteImport.update({
+    id: '/date-planner',
+    path: '/date-planner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDiscoverRoute = AuthenticatedDiscoverRouteImport.update({
   id: '/discover',
   path: '/discover',
@@ -50,6 +66,17 @@ const AuthenticatedEventsRoute = AuthenticatedEventsRouteImport.update({
   path: '/events',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLobolaRoute = AuthenticatedLobolaRouteImport.update({
+  id: '/lobola',
+  path: '/lobola',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMatchCountdownRoute =
+  AuthenticatedMatchCountdownRouteImport.update({
+    id: '/match-countdown',
+    path: '/match-countdown',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedMatchesRoute = AuthenticatedMatchesRouteImport.update({
   id: '/matches',
   path: '/matches',
@@ -58,6 +85,11 @@ const AuthenticatedMatchesRoute = AuthenticatedMatchesRouteImport.update({
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedVoiceIntroRoute = AuthenticatedVoiceIntroRouteImport.update({
+  id: '/voice-intro',
+  path: '/voice-intro',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedMessagesIndexRoute =
@@ -81,10 +113,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/choma': typeof AuthenticatedChomaRoute
+  '/date-planner': typeof AuthenticatedDatePlannerRoute
   '/discover': typeof AuthenticatedDiscoverRoute
   '/events': typeof AuthenticatedEventsRoute
+  '/lobola': typeof AuthenticatedLobolaRoute
+  '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
   '/messages/': typeof AuthenticatedMessagesIndexRoute
@@ -93,10 +130,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/choma': typeof AuthenticatedChomaRoute
+  '/date-planner': typeof AuthenticatedDatePlannerRoute
   '/discover': typeof AuthenticatedDiscoverRoute
   '/events': typeof AuthenticatedEventsRoute
+  '/lobola': typeof AuthenticatedLobolaRoute
+  '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
   '/messages': typeof AuthenticatedMessagesIndexRoute
@@ -107,10 +149,15 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/choma': typeof AuthenticatedChomaRoute
+  '/_authenticated/date-planner': typeof AuthenticatedDatePlannerRoute
   '/_authenticated/discover': typeof AuthenticatedDiscoverRoute
   '/_authenticated/events': typeof AuthenticatedEventsRoute
+  '/_authenticated/lobola': typeof AuthenticatedLobolaRoute
+  '/_authenticated/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/_authenticated/matches': typeof AuthenticatedMatchesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/_authenticated/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/_authenticated/people/$id': typeof AuthenticatedPeopleIdRoute
   '/_authenticated/messages/': typeof AuthenticatedMessagesIndexRoute
@@ -121,10 +168,15 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/choma'
+    | '/date-planner'
     | '/discover'
     | '/events'
+    | '/lobola'
+    | '/match-countdown'
     | '/matches'
     | '/profile'
+    | '/voice-intro'
     | '/messages/$id'
     | '/people/$id'
     | '/messages/'
@@ -133,10 +185,15 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/choma'
+    | '/date-planner'
     | '/discover'
     | '/events'
+    | '/lobola'
+    | '/match-countdown'
     | '/matches'
     | '/profile'
+    | '/voice-intro'
     | '/messages/$id'
     | '/people/$id'
     | '/messages'
@@ -146,10 +203,15 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/choma'
+    | '/_authenticated/date-planner'
     | '/_authenticated/discover'
     | '/_authenticated/events'
+    | '/_authenticated/lobola'
+    | '/_authenticated/match-countdown'
     | '/_authenticated/matches'
     | '/_authenticated/profile'
+    | '/_authenticated/voice-intro'
     | '/_authenticated/messages/$id'
     | '/_authenticated/people/$id'
     | '/_authenticated/messages/'
@@ -192,6 +254,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/choma': {
+      id: '/_authenticated/choma'
+      path: '/choma'
+      fullPath: '/choma'
+      preLoaderRoute: typeof AuthenticatedChomaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/date-planner': {
+      id: '/_authenticated/date-planner'
+      path: '/date-planner'
+      fullPath: '/date-planner'
+      preLoaderRoute: typeof AuthenticatedDatePlannerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/discover': {
       id: '/_authenticated/discover'
       path: '/discover'
@@ -206,6 +282,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEventsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/lobola': {
+      id: '/_authenticated/lobola'
+      path: '/lobola'
+      fullPath: '/lobola'
+      preLoaderRoute: typeof AuthenticatedLobolaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/match-countdown': {
+      id: '/_authenticated/match-countdown'
+      path: '/match-countdown'
+      fullPath: '/match-countdown'
+      preLoaderRoute: typeof AuthenticatedMatchCountdownRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/matches': {
       id: '/_authenticated/matches'
       path: '/matches'
@@ -218,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/voice-intro': {
+      id: '/_authenticated/voice-intro'
+      path: '/voice-intro'
+      fullPath: '/voice-intro'
+      preLoaderRoute: typeof AuthenticatedVoiceIntroRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/messages/': {
@@ -245,20 +342,30 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedChomaRoute: typeof AuthenticatedChomaRoute
+  AuthenticatedDatePlannerRoute: typeof AuthenticatedDatePlannerRoute
   AuthenticatedDiscoverRoute: typeof AuthenticatedDiscoverRoute
   AuthenticatedEventsRoute: typeof AuthenticatedEventsRoute
+  AuthenticatedLobolaRoute: typeof AuthenticatedLobolaRoute
+  AuthenticatedMatchCountdownRoute: typeof AuthenticatedMatchCountdownRoute
   AuthenticatedMatchesRoute: typeof AuthenticatedMatchesRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedVoiceIntroRoute: typeof AuthenticatedVoiceIntroRoute
   AuthenticatedMessagesIdRoute: typeof AuthenticatedMessagesIdRoute
   AuthenticatedPeopleIdRoute: typeof AuthenticatedPeopleIdRoute
   AuthenticatedMessagesIndexRoute: typeof AuthenticatedMessagesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedChomaRoute: AuthenticatedChomaRoute,
+  AuthenticatedDatePlannerRoute: AuthenticatedDatePlannerRoute,
   AuthenticatedDiscoverRoute: AuthenticatedDiscoverRoute,
   AuthenticatedEventsRoute: AuthenticatedEventsRoute,
+  AuthenticatedLobolaRoute: AuthenticatedLobolaRoute,
+  AuthenticatedMatchCountdownRoute: AuthenticatedMatchCountdownRoute,
   AuthenticatedMatchesRoute: AuthenticatedMatchesRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedVoiceIntroRoute: AuthenticatedVoiceIntroRoute,
   AuthenticatedMessagesIdRoute: AuthenticatedMessagesIdRoute,
   AuthenticatedPeopleIdRoute: AuthenticatedPeopleIdRoute,
   AuthenticatedMessagesIndexRoute: AuthenticatedMessagesIndexRoute,
