@@ -1,4 +1,10 @@
 # Roadmap
+- [ ] Add Lobola preferences and compatibility page
+- [ ] Add live Choma friend vouches
+- [ ] Add saved date invitations with accept/decline
+- [ ] Add seven-second voice introductions
+- [ ] Add enforced 48-hour match expiry and countdowns
+- [ ] Verify new member flows and feature navigation
 - [ ] Strong sign-up/login (email + SA phone, strong password)
 - [ ] Member profiles + preferences saved in Cloud (Facebook-style profile pages)
 - [ ] Auto-locate (Mzansi only) + auto-match by distance & interests
