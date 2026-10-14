@@ -14,6 +14,122 @@ export type Database = {
   }
   public: {
     Tables: {
+      choma_vouches: {
+        Row: {
+          created_at: string
+          member: string
+          voucher: string
+        }
+        Insert: {
+          created_at?: string
+          member: string
+          voucher: string
+        }
+        Update: {
+          created_at?: string
+          member?: string
+          voucher?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "choma_vouches_member_fkey"
+            columns: ["member"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "choma_vouches_voucher_fkey"
+            columns: ["voucher"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cultural_preferences: {
+        Row: {
+          family: string
+          intention: string
+          language: string
+          tradition: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          family?: string
+          intention?: string
+          language?: string
+          tradition?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          family?: string
+          intention?: string
+          language?: string
+          tradition?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cultural_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      date_invitations: {
+        Row: {
+          created_at: string
+          id: string
+          province: string
+          receiver: string
+          sender: string
+          starts_at: string
+          status: string
+          venue: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          province: string
+          receiver: string
+          sender: string
+          starts_at: string
+          status?: string
+          venue: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          province?: string
+          receiver?: string
+          sender?: string
+          starts_at?: string
+          status?: string
+          venue?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "date_invitations_receiver_fkey"
+            columns: ["receiver"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "date_invitations_sender_fkey"
+            columns: ["sender"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       event_rsvps: {
         Row: {
           created_at: string
@@ -98,6 +214,45 @@ export type Database = {
           {
             foreignKeyName: "likes_liker_fkey"
             columns: ["liker"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      match_windows: {
+        Row: {
+          expires_at: string
+          matched_at: string
+          member_a: string
+          member_b: string
+          opened_at: string | null
+        }
+        Insert: {
+          expires_at?: string
+          matched_at?: string
+          member_a: string
+          member_b: string
+          opened_at?: string | null
+        }
+        Update: {
+          expires_at?: string
+          matched_at?: string
+          member_a?: string
+          member_b?: string
+          opened_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_windows_member_a_fkey"
+            columns: ["member_a"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_windows_member_b_fkey"
+            columns: ["member_b"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -225,6 +380,35 @@ export type Database = {
           province?: string | null
         }
         Relationships: []
+      }
+      voice_introductions: {
+        Row: {
+          duration: number
+          path: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          duration: number
+          path: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          duration?: number
+          path?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "voice_introductions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

@@ -7,6 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/hooks/use-me";
 import { inSouthAfrica, nearestProvince } from "@/lib/sa";
 import { MemberPhoto } from "@/components/Avatar";
+import { FeatureLinks } from '@/components/FeatureLinks';
+import { useFeatureLive } from '@/hooks/use-features';
 
 const tabs = [
   { to: "/discover", label: "Discover", icon: Compass },
@@ -19,6 +21,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const { data: me } = useMe();
+  useFeatureLive(me?.id);
 
   // Auto-locate (Mzansi only) + presence
   useEffect(() => {
@@ -91,7 +94,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </button>
           </div>
         </header>
-        <main className="flex-1 px-4 pb-28">{children}</main>
+        <main className="flex-1 px-4 pb-28"><FeatureLinks />{children}</main>
         <nav className="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-md border-t border-gold/20 bg-wine/90 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur">
           <ul className="grid grid-cols-4">
             {tabs.map(({ to, label, icon: Icon }) => (

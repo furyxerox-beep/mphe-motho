@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Profile } from "@/lib/sa";
+import { useClock, useFeatureData } from '@/hooks/use-features';
+import { matchActive, windowFor } from '@/lib/features';
 
 export function useMe() {
   return useQuery({
@@ -26,7 +28,9 @@ export function useProfiles() {
 }
 
 export function useLikes() {
-  return useQuery({
+  const now = useClock();
+  const { data: features } = useFeatureData();
+  const query = useQuery({
     queryKey: ["likes"],
     queryFn: async () => {
       const { data, error } = await supabase.from("likes").select("liker, liked");
@@ -34,6 +38,10 @@ export function useLikes() {
       return data;
     },
   });
+  return { ...query, data: query.data?.filter(l => {
+    const window = windowFor(features?.windows ?? [], l.liker, l.liked);
+    return !window || matchActive(window, now);
+  }) };
 }
 
 export function matchIds(me: string | undefined, likes: { liker: string; liked: string }[] | undefined) {
