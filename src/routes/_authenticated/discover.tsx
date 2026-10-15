@@ -8,6 +8,7 @@ import { MemberPhoto } from "@/components/Avatar";
 import { useLikes, useMe, useProfiles } from "@/hooks/use-me";
 import { age, compatibility } from "@/lib/sa";
 import { supabase } from "@/integrations/supabase/client";
+import { HomeFeatureLinks } from '@/components/HomeFeatureLinks';
 
 export const Route = createFileRoute("/_authenticated/discover")({
   head: () => ({ meta: [{ title: "Discover — Mphe-Motho" }, { name: "description", content: "Singles near you, auto-matched." }] }),
@@ -48,6 +49,7 @@ function Discover() {
 
   return (
     <AppShell>
+      <HomeFeatureLinks />
       {nudge}
       {!top ? (
         <Empty>No new singles right now. Check back soon — new members join every day.</Empty>

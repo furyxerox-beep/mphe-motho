@@ -1,4 +1,6 @@
 # Roadmap
+- [ ] Add five home buttons and working holiday, group-date, safety, milestone, and music pages
+- [ ] Verify saved new-feature data and home navigation
 - [ ] Add Lobola preferences and compatibility page
 - [ ] Add live Choma friend vouches
 - [ ] Add saved date invitations with accept/decline

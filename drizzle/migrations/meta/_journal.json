@@ -15,6 +15,13 @@
       "when": 1791975067167,
       "tag": "0001_mzansi_connection_features",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792053344642,
+      "tag": "0002_home_connection_experiences",
+      "breakpoints": true
     }
   ]
 }
