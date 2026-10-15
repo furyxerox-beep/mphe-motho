@@ -3,6 +3,7 @@ import { Heart, ShieldCheck, MapPin, MessageCircle } from "lucide-react";
 import neo from "@/assets/neo.jpg";
 import thandi from "@/assets/thandi.jpg";
 import sipho from "@/assets/sipho.jpg";
+import { HomeFeatureLinks } from '@/components/HomeFeatureLinks';
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,6 +12,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Meet verified South African singles near you. Global hearts, local connections." },
       { property: "og:title", content: "Mphe-Motho — Dating for Mzansi" },
       { property: "og:description", content: "Meet verified South African singles near you." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Landing,
@@ -32,6 +35,7 @@ function Landing() {
           <li className="flex gap-3"><MessageCircle className="h-5 w-5 text-gold" />Live private chat with your matches</li>
           <li className="flex gap-3"><ShieldCheck className="h-5 w-5 text-gold" />South African numbers only, verified email</li>
         </ul>
+        <HomeFeatureLinks />
         <Link to="/auth" className="mt-auto flex items-center justify-center gap-2 rounded-full bg-primary-gradient py-4 font-semibold text-cream shadow-glow">
           <Heart className="h-5 w-5 fill-gold text-gold" /> Get started
         </Link>

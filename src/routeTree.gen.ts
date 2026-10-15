@@ -15,8 +15,10 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedChomaRouteImport } from './routes/_authenticated/choma'
 import { Route as AuthenticatedDatePlannerRouteImport } from './routes/_authenticated/date-planner'
+import { Route as AuthenticatedDezembrRouteImport } from './routes/_authenticated/dezembr'
 import { Route as AuthenticatedDiscoverRouteImport } from './routes/_authenticated/discover'
 import { Route as AuthenticatedEventsRouteImport } from './routes/_authenticated/events'
+import { Route as AuthenticatedGrooveMatchRouteImport } from './routes/_authenticated/groove-match'
 import { Route as AuthenticatedLobolaRouteImport } from './routes/_authenticated/lobola'
 import { Route as AuthenticatedMatchCountdownRouteImport } from './routes/_authenticated/match-countdown'
 import { Route as AuthenticatedMatchesRouteImport } from './routes/_authenticated/matches'
@@ -56,6 +58,11 @@ const AuthenticatedDatePlannerRoute =
     path: '/date-planner',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDezembrRoute = AuthenticatedDezembrRouteImport.update({
+  id: '/dezembr',
+  path: '/dezembr',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDiscoverRoute = AuthenticatedDiscoverRouteImport.update({
   id: '/discover',
   path: '/discover',
@@ -66,6 +73,12 @@ const AuthenticatedEventsRoute = AuthenticatedEventsRouteImport.update({
   path: '/events',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedGrooveMatchRoute =
+  AuthenticatedGrooveMatchRouteImport.update({
+    id: '/groove-match',
+    path: '/groove-match',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLobolaRoute = AuthenticatedLobolaRouteImport.update({
   id: '/lobola',
   path: '/lobola',
@@ -115,8 +128,10 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/choma': typeof AuthenticatedChomaRoute
   '/date-planner': typeof AuthenticatedDatePlannerRoute
+  '/dezembr': typeof AuthenticatedDezembrRoute
   '/discover': typeof AuthenticatedDiscoverRoute
   '/events': typeof AuthenticatedEventsRoute
+  '/groove-match': typeof AuthenticatedGrooveMatchRoute
   '/lobola': typeof AuthenticatedLobolaRoute
   '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
@@ -132,8 +147,10 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/choma': typeof AuthenticatedChomaRoute
   '/date-planner': typeof AuthenticatedDatePlannerRoute
+  '/dezembr': typeof AuthenticatedDezembrRoute
   '/discover': typeof AuthenticatedDiscoverRoute
   '/events': typeof AuthenticatedEventsRoute
+  '/groove-match': typeof AuthenticatedGrooveMatchRoute
   '/lobola': typeof AuthenticatedLobolaRoute
   '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
@@ -151,8 +168,10 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/choma': typeof AuthenticatedChomaRoute
   '/_authenticated/date-planner': typeof AuthenticatedDatePlannerRoute
+  '/_authenticated/dezembr': typeof AuthenticatedDezembrRoute
   '/_authenticated/discover': typeof AuthenticatedDiscoverRoute
   '/_authenticated/events': typeof AuthenticatedEventsRoute
+  '/_authenticated/groove-match': typeof AuthenticatedGrooveMatchRoute
   '/_authenticated/lobola': typeof AuthenticatedLobolaRoute
   '/_authenticated/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/_authenticated/matches': typeof AuthenticatedMatchesRoute
@@ -170,8 +189,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/choma'
     | '/date-planner'
+    | '/dezembr'
     | '/discover'
     | '/events'
+    | '/groove-match'
     | '/lobola'
     | '/match-countdown'
     | '/matches'
@@ -187,8 +208,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/choma'
     | '/date-planner'
+    | '/dezembr'
     | '/discover'
     | '/events'
+    | '/groove-match'
     | '/lobola'
     | '/match-countdown'
     | '/matches'
@@ -205,8 +228,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/choma'
     | '/_authenticated/date-planner'
+    | '/_authenticated/dezembr'
     | '/_authenticated/discover'
     | '/_authenticated/events'
+    | '/_authenticated/groove-match'
     | '/_authenticated/lobola'
     | '/_authenticated/match-countdown'
     | '/_authenticated/matches'
@@ -268,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDatePlannerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dezembr': {
+      id: '/_authenticated/dezembr'
+      path: '/dezembr'
+      fullPath: '/dezembr'
+      preLoaderRoute: typeof AuthenticatedDezembrRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/discover': {
       id: '/_authenticated/discover'
       path: '/discover'
@@ -280,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof AuthenticatedEventsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/groove-match': {
+      id: '/_authenticated/groove-match'
+      path: '/groove-match'
+      fullPath: '/groove-match'
+      preLoaderRoute: typeof AuthenticatedGrooveMatchRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/lobola': {
@@ -344,8 +383,10 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChomaRoute: typeof AuthenticatedChomaRoute
   AuthenticatedDatePlannerRoute: typeof AuthenticatedDatePlannerRoute
+  AuthenticatedDezembrRoute: typeof AuthenticatedDezembrRoute
   AuthenticatedDiscoverRoute: typeof AuthenticatedDiscoverRoute
   AuthenticatedEventsRoute: typeof AuthenticatedEventsRoute
+  AuthenticatedGrooveMatchRoute: typeof AuthenticatedGrooveMatchRoute
   AuthenticatedLobolaRoute: typeof AuthenticatedLobolaRoute
   AuthenticatedMatchCountdownRoute: typeof AuthenticatedMatchCountdownRoute
   AuthenticatedMatchesRoute: typeof AuthenticatedMatchesRoute
@@ -359,8 +400,10 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChomaRoute: AuthenticatedChomaRoute,
   AuthenticatedDatePlannerRoute: AuthenticatedDatePlannerRoute,
+  AuthenticatedDezembrRoute: AuthenticatedDezembrRoute,
   AuthenticatedDiscoverRoute: AuthenticatedDiscoverRoute,
   AuthenticatedEventsRoute: AuthenticatedEventsRoute,
+  AuthenticatedGrooveMatchRoute: AuthenticatedGrooveMatchRoute,
   AuthenticatedLobolaRoute: AuthenticatedLobolaRoute,
   AuthenticatedMatchCountdownRoute: AuthenticatedMatchCountdownRoute,
   AuthenticatedMatchesRoute: AuthenticatedMatchesRoute,
