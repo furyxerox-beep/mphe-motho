@@ -19,10 +19,13 @@ import { Route as AuthenticatedDezembrRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedDiscoverRouteImport } from './routes/_authenticated/discover'
 import { Route as AuthenticatedEventsRouteImport } from './routes/_authenticated/events'
 import { Route as AuthenticatedGrooveMatchRouteImport } from './routes/_authenticated/groove-match'
+import { Route as AuthenticatedGroupDatesRouteImport } from './routes/_authenticated/group-dates'
 import { Route as AuthenticatedLobolaRouteImport } from './routes/_authenticated/lobola'
 import { Route as AuthenticatedMatchCountdownRouteImport } from './routes/_authenticated/match-countdown'
 import { Route as AuthenticatedMatchesRouteImport } from './routes/_authenticated/matches'
+import { Route as AuthenticatedMilestonesRouteImport } from './routes/_authenticated/milestones'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedSafetyShieldRouteImport } from './routes/_authenticated/safety-shield'
 import { Route as AuthenticatedVoiceIntroRouteImport } from './routes/_authenticated/voice-intro'
 import { Route as AuthenticatedMessagesIndexRouteImport } from './routes/_authenticated/messages.index'
 import { Route as AuthenticatedMessagesIdRouteImport } from './routes/_authenticated/messages.$id'
@@ -79,6 +82,11 @@ const AuthenticatedGrooveMatchRoute =
     path: '/groove-match',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedGroupDatesRoute = AuthenticatedGroupDatesRouteImport.update({
+  id: '/group-dates',
+  path: '/group-dates',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedLobolaRoute = AuthenticatedLobolaRouteImport.update({
   id: '/lobola',
   path: '/lobola',
@@ -95,11 +103,22 @@ const AuthenticatedMatchesRoute = AuthenticatedMatchesRouteImport.update({
   path: '/matches',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMilestonesRoute = AuthenticatedMilestonesRouteImport.update({
+  id: '/milestones',
+  path: '/milestones',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSafetyShieldRoute =
+  AuthenticatedSafetyShieldRouteImport.update({
+    id: '/safety-shield',
+    path: '/safety-shield',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedVoiceIntroRoute = AuthenticatedVoiceIntroRouteImport.update({
   id: '/voice-intro',
   path: '/voice-intro',
@@ -132,10 +151,13 @@ export interface FileRoutesByFullPath {
   '/discover': typeof AuthenticatedDiscoverRoute
   '/events': typeof AuthenticatedEventsRoute
   '/groove-match': typeof AuthenticatedGrooveMatchRoute
+  '/group-dates': typeof AuthenticatedGroupDatesRoute
   '/lobola': typeof AuthenticatedLobolaRoute
   '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
+  '/milestones': typeof AuthenticatedMilestonesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/safety-shield': typeof AuthenticatedSafetyShieldRoute
   '/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
@@ -151,10 +173,13 @@ export interface FileRoutesByTo {
   '/discover': typeof AuthenticatedDiscoverRoute
   '/events': typeof AuthenticatedEventsRoute
   '/groove-match': typeof AuthenticatedGrooveMatchRoute
+  '/group-dates': typeof AuthenticatedGroupDatesRoute
   '/lobola': typeof AuthenticatedLobolaRoute
   '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
+  '/milestones': typeof AuthenticatedMilestonesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/safety-shield': typeof AuthenticatedSafetyShieldRoute
   '/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
@@ -172,10 +197,13 @@ export interface FileRoutesById {
   '/_authenticated/discover': typeof AuthenticatedDiscoverRoute
   '/_authenticated/events': typeof AuthenticatedEventsRoute
   '/_authenticated/groove-match': typeof AuthenticatedGrooveMatchRoute
+  '/_authenticated/group-dates': typeof AuthenticatedGroupDatesRoute
   '/_authenticated/lobola': typeof AuthenticatedLobolaRoute
   '/_authenticated/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/_authenticated/matches': typeof AuthenticatedMatchesRoute
+  '/_authenticated/milestones': typeof AuthenticatedMilestonesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/safety-shield': typeof AuthenticatedSafetyShieldRoute
   '/_authenticated/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/_authenticated/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/_authenticated/people/$id': typeof AuthenticatedPeopleIdRoute
@@ -193,10 +221,13 @@ export interface FileRouteTypes {
     | '/discover'
     | '/events'
     | '/groove-match'
+    | '/group-dates'
     | '/lobola'
     | '/match-countdown'
     | '/matches'
+    | '/milestones'
     | '/profile'
+    | '/safety-shield'
     | '/voice-intro'
     | '/messages/$id'
     | '/people/$id'
@@ -212,10 +243,13 @@ export interface FileRouteTypes {
     | '/discover'
     | '/events'
     | '/groove-match'
+    | '/group-dates'
     | '/lobola'
     | '/match-countdown'
     | '/matches'
+    | '/milestones'
     | '/profile'
+    | '/safety-shield'
     | '/voice-intro'
     | '/messages/$id'
     | '/people/$id'
@@ -232,10 +266,13 @@ export interface FileRouteTypes {
     | '/_authenticated/discover'
     | '/_authenticated/events'
     | '/_authenticated/groove-match'
+    | '/_authenticated/group-dates'
     | '/_authenticated/lobola'
     | '/_authenticated/match-countdown'
     | '/_authenticated/matches'
+    | '/_authenticated/milestones'
     | '/_authenticated/profile'
+    | '/_authenticated/safety-shield'
     | '/_authenticated/voice-intro'
     | '/_authenticated/messages/$id'
     | '/_authenticated/people/$id'
@@ -321,6 +358,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGrooveMatchRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/group-dates': {
+      id: '/_authenticated/group-dates'
+      path: '/group-dates'
+      fullPath: '/group-dates'
+      preLoaderRoute: typeof AuthenticatedGroupDatesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/lobola': {
       id: '/_authenticated/lobola'
       path: '/lobola'
@@ -342,11 +386,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMatchesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/milestones': {
+      id: '/_authenticated/milestones'
+      path: '/milestones'
+      fullPath: '/milestones'
+      preLoaderRoute: typeof AuthenticatedMilestonesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/safety-shield': {
+      id: '/_authenticated/safety-shield'
+      path: '/safety-shield'
+      fullPath: '/safety-shield'
+      preLoaderRoute: typeof AuthenticatedSafetyShieldRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/voice-intro': {
@@ -387,10 +445,13 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDiscoverRoute: typeof AuthenticatedDiscoverRoute
   AuthenticatedEventsRoute: typeof AuthenticatedEventsRoute
   AuthenticatedGrooveMatchRoute: typeof AuthenticatedGrooveMatchRoute
+  AuthenticatedGroupDatesRoute: typeof AuthenticatedGroupDatesRoute
   AuthenticatedLobolaRoute: typeof AuthenticatedLobolaRoute
   AuthenticatedMatchCountdownRoute: typeof AuthenticatedMatchCountdownRoute
   AuthenticatedMatchesRoute: typeof AuthenticatedMatchesRoute
+  AuthenticatedMilestonesRoute: typeof AuthenticatedMilestonesRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedSafetyShieldRoute: typeof AuthenticatedSafetyShieldRoute
   AuthenticatedVoiceIntroRoute: typeof AuthenticatedVoiceIntroRoute
   AuthenticatedMessagesIdRoute: typeof AuthenticatedMessagesIdRoute
   AuthenticatedPeopleIdRoute: typeof AuthenticatedPeopleIdRoute
@@ -404,10 +465,13 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDiscoverRoute: AuthenticatedDiscoverRoute,
   AuthenticatedEventsRoute: AuthenticatedEventsRoute,
   AuthenticatedGrooveMatchRoute: AuthenticatedGrooveMatchRoute,
+  AuthenticatedGroupDatesRoute: AuthenticatedGroupDatesRoute,
   AuthenticatedLobolaRoute: AuthenticatedLobolaRoute,
   AuthenticatedMatchCountdownRoute: AuthenticatedMatchCountdownRoute,
   AuthenticatedMatchesRoute: AuthenticatedMatchesRoute,
+  AuthenticatedMilestonesRoute: AuthenticatedMilestonesRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedSafetyShieldRoute: AuthenticatedSafetyShieldRoute,
   AuthenticatedVoiceIntroRoute: AuthenticatedVoiceIntroRoute,
   AuthenticatedMessagesIdRoute: AuthenticatedMessagesIdRoute,
   AuthenticatedPeopleIdRoute: AuthenticatedPeopleIdRoute,
