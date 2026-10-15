@@ -187,6 +187,109 @@ export type Database = {
         }
         Relationships: []
       }
+      group_date_members: {
+        Row: {
+          date_id: string
+          user_id: string
+        }
+        Insert: {
+          date_id: string
+          user_id: string
+        }
+        Update: {
+          date_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_date_members_date_id_fkey"
+            columns: ["date_id"]
+            isOneToOne: false
+            referencedRelation: "group_dates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_date_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      group_dates: {
+        Row: {
+          cancelled: boolean
+          capacity: number
+          host: string
+          id: string
+          province: string
+          starts_at: string
+          title: string
+          venue: string
+        }
+        Insert: {
+          cancelled?: boolean
+          capacity?: number
+          host: string
+          id?: string
+          province: string
+          starts_at: string
+          title: string
+          venue: string
+        }
+        Update: {
+          cancelled?: boolean
+          capacity?: number
+          host?: string
+          id?: string
+          province?: string
+          starts_at?: string
+          title?: string
+          venue?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_dates_host_fkey"
+            columns: ["host"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      holiday_preferences: {
+        Row: {
+          available_from: string
+          available_until: string
+          festive_mode: boolean
+          province: string
+          user_id: string
+        }
+        Insert: {
+          available_from: string
+          available_until: string
+          festive_mode?: boolean
+          province: string
+          user_id: string
+        }
+        Update: {
+          available_from?: string
+          available_until?: string
+          festive_mode?: boolean
+          province?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "holiday_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       likes: {
         Row: {
           created_at: string
@@ -301,6 +404,38 @@ export type Database = {
           },
         ]
       }
+      music_preferences: {
+        Row: {
+          artist: string
+          genres: string[]
+          playlist_url: string
+          track: string
+          user_id: string
+        }
+        Insert: {
+          artist?: string
+          genres?: string[]
+          playlist_url?: string
+          track?: string
+          user_id: string
+        }
+        Update: {
+          artist?: string
+          genres?: string[]
+          playlist_url?: string
+          track?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "music_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       private_details: {
         Row: {
           created_at: string
@@ -380,6 +515,76 @@ export type Database = {
           province?: string | null
         }
         Relationships: []
+      }
+      relationship_milestones: {
+        Row: {
+          anniversary: string
+          created_at: string
+          id: string
+          shared: boolean
+          story: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          anniversary: string
+          created_at?: string
+          id?: string
+          shared?: boolean
+          story?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          anniversary?: string
+          created_at?: string
+          id?: string
+          shared?: boolean
+          story?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "relationship_milestones_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      safety_submissions: {
+        Row: {
+          created_at: string
+          id: string
+          path: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          path: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          path?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "safety_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       voice_introductions: {
         Row: {
