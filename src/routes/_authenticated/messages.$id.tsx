@@ -14,6 +14,8 @@ export const Route = createFileRoute("/_authenticated/messages/$id")({
 
 const sparks = ["What's your perfect Sunday in Mzansi?", "Braai or fine dining?", "Which song always gets you dancing?", "Dream weekend getaway?"];
 
+const EMOJIS: string[] = ["😀","😂","🥰","😍","😘","😉","😊","🤗","😎","🤔","😅","😭","🙏","👏","🔥","💛","❤️","💕","💯","🎉","🌹","💃","🕺","🍖","☕","🌍","🇿🇦","👋","👍","😴","🥳","✨"];
+
 function Chat() {
   const { id } = Route.useParams();
   const qc = useQueryClient();
@@ -23,6 +25,7 @@ function Chat() {
   const other = profiles?.find((p) => p.id === id);
   const isMatch = matchIds(me?.id, likes).includes(id);
   const [text, setText] = useState("");
+  const [showEmoji, setShowEmoji] = useState(false);
   const end = useRef<HTMLDivElement>(null);
   const key = ["messages", "thread", id];
 
