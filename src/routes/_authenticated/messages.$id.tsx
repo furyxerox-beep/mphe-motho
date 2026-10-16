@@ -94,8 +94,16 @@ function Chat() {
         ))}
         <div ref={end} />
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); void send(text); }} className="mx-auto flex w-full max-w-md gap-2 border-t border-gold/20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <input value={text} onChange={(e) => setText(e.target.value)} disabled={!isMatch} placeholder={isMatch ? "Type a message…" : "Match first to chat"} className="flex-1 rounded-full border border-gold/30 bg-card/20 px-4 py-3 text-cream placeholder:text-cream/40 outline-none" />
+      {showEmoji && isMatch && (
+        <div className="mx-auto grid w-full max-w-md grid-cols-8 gap-1 border-t border-gold/20 bg-wine/80 p-2">
+          {EMOJIS.map((e) => (
+            <button key={e} type="button" onClick={() => setText((t) => t + e)} className="rounded-lg p-1 text-2xl hover:bg-card/20">{e}</button>
+          ))}
+        </div>
+      )}
+      <form onSubmit={(e) => { e.preventDefault(); setShowEmoji(false); void send(text); }} className="mx-auto flex w-full max-w-md gap-2 border-t border-gold/20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <button type="button" aria-label="Emojis" disabled={!isMatch} onClick={() => setShowEmoji((v) => !v)} className="grid h-12 w-12 place-items-center rounded-full border border-gold/30 text-2xl">😊</button>
+        <input value={text} onChange={(e) => setText(e.target.value)} disabled={!isMatch} placeholder={isMatch ? "Type a message…" : "Match first to chat"} className="min-w-0 flex-1 rounded-full border border-gold/30 bg-card/20 px-4 py-3 text-cream placeholder:text-cream/40 outline-none" />
         <button aria-label="Send" disabled={!isMatch} className="grid h-12 w-12 place-items-center rounded-full bg-primary-gradient text-cream"><Send className="h-5 w-5" /></button>
       </form>
     </div>
