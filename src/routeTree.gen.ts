@@ -14,6 +14,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedChomaRouteImport } from './routes/_authenticated/choma'
+import { Route as AuthenticatedConfessionsRouteImport } from './routes/_authenticated/confessions'
+import { Route as AuthenticatedDateFundRouteImport } from './routes/_authenticated/date-fund'
 import { Route as AuthenticatedDatePlannerRouteImport } from './routes/_authenticated/date-planner'
 import { Route as AuthenticatedDezembrRouteImport } from './routes/_authenticated/dezembr'
 import { Route as AuthenticatedDiscoverRouteImport } from './routes/_authenticated/discover'
@@ -26,6 +28,7 @@ import { Route as AuthenticatedMatchesRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedMilestonesRouteImport } from './routes/_authenticated/milestones'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedSafetyShieldRouteImport } from './routes/_authenticated/safety-shield'
+import { Route as AuthenticatedUmshadoRouteImport } from './routes/_authenticated/umshado'
 import { Route as AuthenticatedVoiceIntroRouteImport } from './routes/_authenticated/voice-intro'
 import { Route as AuthenticatedMessagesIndexRouteImport } from './routes/_authenticated/messages.index'
 import { Route as AuthenticatedMessagesIdRouteImport } from './routes/_authenticated/messages.$id'
@@ -53,6 +56,17 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const AuthenticatedChomaRoute = AuthenticatedChomaRouteImport.update({
   id: '/choma',
   path: '/choma',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedConfessionsRoute =
+  AuthenticatedConfessionsRouteImport.update({
+    id: '/confessions',
+    path: '/confessions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDateFundRoute = AuthenticatedDateFundRouteImport.update({
+  id: '/date-fund',
+  path: '/date-fund',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDatePlannerRoute =
@@ -119,6 +133,11 @@ const AuthenticatedSafetyShieldRoute =
     path: '/safety-shield',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedUmshadoRoute = AuthenticatedUmshadoRouteImport.update({
+  id: '/umshado',
+  path: '/umshado',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedVoiceIntroRoute = AuthenticatedVoiceIntroRouteImport.update({
   id: '/voice-intro',
   path: '/voice-intro',
@@ -146,6 +165,8 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/choma': typeof AuthenticatedChomaRoute
+  '/confessions': typeof AuthenticatedConfessionsRoute
+  '/date-fund': typeof AuthenticatedDateFundRoute
   '/date-planner': typeof AuthenticatedDatePlannerRoute
   '/dezembr': typeof AuthenticatedDezembrRoute
   '/discover': typeof AuthenticatedDiscoverRoute
@@ -158,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/milestones': typeof AuthenticatedMilestonesRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/safety-shield': typeof AuthenticatedSafetyShieldRoute
+  '/umshado': typeof AuthenticatedUmshadoRoute
   '/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
@@ -168,6 +190,8 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/choma': typeof AuthenticatedChomaRoute
+  '/confessions': typeof AuthenticatedConfessionsRoute
+  '/date-fund': typeof AuthenticatedDateFundRoute
   '/date-planner': typeof AuthenticatedDatePlannerRoute
   '/dezembr': typeof AuthenticatedDezembrRoute
   '/discover': typeof AuthenticatedDiscoverRoute
@@ -180,6 +204,7 @@ export interface FileRoutesByTo {
   '/milestones': typeof AuthenticatedMilestonesRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/safety-shield': typeof AuthenticatedSafetyShieldRoute
+  '/umshado': typeof AuthenticatedUmshadoRoute
   '/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
@@ -192,6 +217,8 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/choma': typeof AuthenticatedChomaRoute
+  '/_authenticated/confessions': typeof AuthenticatedConfessionsRoute
+  '/_authenticated/date-fund': typeof AuthenticatedDateFundRoute
   '/_authenticated/date-planner': typeof AuthenticatedDatePlannerRoute
   '/_authenticated/dezembr': typeof AuthenticatedDezembrRoute
   '/_authenticated/discover': typeof AuthenticatedDiscoverRoute
@@ -204,6 +231,7 @@ export interface FileRoutesById {
   '/_authenticated/milestones': typeof AuthenticatedMilestonesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/safety-shield': typeof AuthenticatedSafetyShieldRoute
+  '/_authenticated/umshado': typeof AuthenticatedUmshadoRoute
   '/_authenticated/voice-intro': typeof AuthenticatedVoiceIntroRoute
   '/_authenticated/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/_authenticated/people/$id': typeof AuthenticatedPeopleIdRoute
@@ -216,6 +244,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/choma'
+    | '/confessions'
+    | '/date-fund'
     | '/date-planner'
     | '/dezembr'
     | '/discover'
@@ -228,6 +258,7 @@ export interface FileRouteTypes {
     | '/milestones'
     | '/profile'
     | '/safety-shield'
+    | '/umshado'
     | '/voice-intro'
     | '/messages/$id'
     | '/people/$id'
@@ -238,6 +269,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/choma'
+    | '/confessions'
+    | '/date-fund'
     | '/date-planner'
     | '/dezembr'
     | '/discover'
@@ -250,6 +283,7 @@ export interface FileRouteTypes {
     | '/milestones'
     | '/profile'
     | '/safety-shield'
+    | '/umshado'
     | '/voice-intro'
     | '/messages/$id'
     | '/people/$id'
@@ -261,6 +295,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/_authenticated/choma'
+    | '/_authenticated/confessions'
+    | '/_authenticated/date-fund'
     | '/_authenticated/date-planner'
     | '/_authenticated/dezembr'
     | '/_authenticated/discover'
@@ -273,6 +309,7 @@ export interface FileRouteTypes {
     | '/_authenticated/milestones'
     | '/_authenticated/profile'
     | '/_authenticated/safety-shield'
+    | '/_authenticated/umshado'
     | '/_authenticated/voice-intro'
     | '/_authenticated/messages/$id'
     | '/_authenticated/people/$id'
@@ -321,6 +358,20 @@ declare module '@tanstack/react-router' {
       path: '/choma'
       fullPath: '/choma'
       preLoaderRoute: typeof AuthenticatedChomaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/confessions': {
+      id: '/_authenticated/confessions'
+      path: '/confessions'
+      fullPath: '/confessions'
+      preLoaderRoute: typeof AuthenticatedConfessionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/date-fund': {
+      id: '/_authenticated/date-fund'
+      path: '/date-fund'
+      fullPath: '/date-fund'
+      preLoaderRoute: typeof AuthenticatedDateFundRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/date-planner': {
@@ -407,6 +458,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSafetyShieldRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/umshado': {
+      id: '/_authenticated/umshado'
+      path: '/umshado'
+      fullPath: '/umshado'
+      preLoaderRoute: typeof AuthenticatedUmshadoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/voice-intro': {
       id: '/_authenticated/voice-intro'
       path: '/voice-intro'
@@ -440,6 +498,8 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChomaRoute: typeof AuthenticatedChomaRoute
+  AuthenticatedConfessionsRoute: typeof AuthenticatedConfessionsRoute
+  AuthenticatedDateFundRoute: typeof AuthenticatedDateFundRoute
   AuthenticatedDatePlannerRoute: typeof AuthenticatedDatePlannerRoute
   AuthenticatedDezembrRoute: typeof AuthenticatedDezembrRoute
   AuthenticatedDiscoverRoute: typeof AuthenticatedDiscoverRoute
@@ -452,6 +512,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMilestonesRoute: typeof AuthenticatedMilestonesRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSafetyShieldRoute: typeof AuthenticatedSafetyShieldRoute
+  AuthenticatedUmshadoRoute: typeof AuthenticatedUmshadoRoute
   AuthenticatedVoiceIntroRoute: typeof AuthenticatedVoiceIntroRoute
   AuthenticatedMessagesIdRoute: typeof AuthenticatedMessagesIdRoute
   AuthenticatedPeopleIdRoute: typeof AuthenticatedPeopleIdRoute
@@ -460,6 +521,8 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChomaRoute: AuthenticatedChomaRoute,
+  AuthenticatedConfessionsRoute: AuthenticatedConfessionsRoute,
+  AuthenticatedDateFundRoute: AuthenticatedDateFundRoute,
   AuthenticatedDatePlannerRoute: AuthenticatedDatePlannerRoute,
   AuthenticatedDezembrRoute: AuthenticatedDezembrRoute,
   AuthenticatedDiscoverRoute: AuthenticatedDiscoverRoute,
@@ -472,6 +535,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMilestonesRoute: AuthenticatedMilestonesRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSafetyShieldRoute: AuthenticatedSafetyShieldRoute,
+  AuthenticatedUmshadoRoute: AuthenticatedUmshadoRoute,
   AuthenticatedVoiceIntroRoute: AuthenticatedVoiceIntroRoute,
   AuthenticatedMessagesIdRoute: AuthenticatedMessagesIdRoute,
   AuthenticatedPeopleIdRoute: AuthenticatedPeopleIdRoute,
