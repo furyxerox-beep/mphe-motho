@@ -1,4 +1,5 @@
 # Roadmap
+- [ ] Add Confessions, Umshado, Date Fund, language audio bio
 - [ ] Add five home buttons and working holiday, group-date, safety, milestone, and music pages
 - [ ] Verify saved new-feature data and home navigation
 - [ ] Add Lobola preferences and compatibility page

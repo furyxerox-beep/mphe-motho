@@ -47,6 +47,30 @@ export type Database = {
           },
         ]
       }
+      confessions: {
+        Row: {
+          author: string
+          body: string
+          created_at: string
+          id: string
+          kind: string
+        }
+        Insert: {
+          author?: string
+          body: string
+          created_at?: string
+          id?: string
+          kind?: string
+        }
+        Update: {
+          author?: string
+          body?: string
+          created_at?: string
+          id?: string
+          kind?: string
+        }
+        Relationships: []
+      }
       cultural_preferences: {
         Row: {
           family: string
@@ -77,6 +101,48 @@ export type Database = {
             foreignKeyName: "cultural_preferences_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      date_gifts: {
+        Row: {
+          created_at: string
+          gift: string
+          id: string
+          note: string
+          receiver: string
+          sender: string
+        }
+        Insert: {
+          created_at?: string
+          gift: string
+          id?: string
+          note?: string
+          receiver: string
+          sender: string
+        }
+        Update: {
+          created_at?: string
+          gift?: string
+          id?: string
+          note?: string
+          receiver?: string
+          sender?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "date_gifts_receiver_fkey"
+            columns: ["receiver"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "date_gifts_sender_fkey"
+            columns: ["sender"]
+            isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -479,6 +545,7 @@ export type Database = {
           lat: number | null
           lng: number | null
           province: string | null
+          umshado_intent: string | null
         }
         Insert: {
           avatar_path?: string | null
@@ -496,6 +563,7 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           province?: string | null
+          umshado_intent?: string | null
         }
         Update: {
           avatar_path?: string | null
@@ -513,6 +581,7 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           province?: string | null
+          umshado_intent?: string | null
         }
         Relationships: []
       }
@@ -589,18 +658,21 @@ export type Database = {
       voice_introductions: {
         Row: {
           duration: number
+          language: string
           path: string
           updated_at: string
           user_id: string
         }
         Insert: {
           duration: number
+          language?: string
           path: string
           updated_at?: string
           user_id: string
         }
         Update: {
           duration?: number
+          language?: string
           path?: string
           updated_at?: string
           user_id?: string

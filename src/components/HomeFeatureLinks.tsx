@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { Sun, Users, ShieldCheck, HeartHandshake, Music2, ArrowUpRight } from 'lucide-react';
+import { Sun, Users, ShieldCheck, HeartHandshake, Music2, ArrowUpRight, Bus, Gem, Gift, Mic } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const links = [
@@ -8,11 +8,15 @@ const links = [
   { to: '/safety-shield', label: 'Safety Shield', detail: 'Video Verification', icon: ShieldCheck },
   { to: '/milestones', label: 'Milestones', detail: 'Success Stories', icon: HeartHandshake },
   { to: '/groove-match', label: 'Groove Match', detail: 'Music Connections', icon: Music2 },
+  { to: '/confessions', label: 'Taxicab Confessions', detail: 'Anonymous Forums', icon: Bus },
+  { to: '/umshado', label: 'Umshado Forecast', detail: 'Long-Term Intent', icon: Gem },
+  { to: '/date-fund', label: 'The Date Fund', detail: 'Digital Gifting', icon: Gift },
+  { to: '/voice-intro', label: 'Language Audio Bio', detail: 'Multilingual Voice', icon: Mic },
 ] as const;
 
 export function HomeFeatureLinks() {
   return <nav aria-label="Love and lifestyle" className="my-6 grid grid-cols-2 gap-2">
-    {links.map(({ to, label, detail, icon: Icon }) => <Button asChild variant="outline" key={to} className="h-auto min-h-24 justify-start whitespace-normal border-gold/30 bg-card/20 px-3 py-4 text-cream last:col-span-2">
+    {links.map(({ to, label, detail, icon: Icon }) => <Button asChild variant="outline" key={to} className="h-auto min-h-24 justify-start whitespace-normal border-gold/30 bg-card/20 px-3 py-4 text-cream">
       <Link to={to}><Icon className="text-gold" /><span className="min-w-0 flex-1 text-left"><span className="block font-semibold">{label}</span><span className="mt-1 block text-xs font-normal text-cream/60">{detail}</span></span><ArrowUpRight className="text-gold/60" /></Link>
     </Button>)}
   </nav>;
