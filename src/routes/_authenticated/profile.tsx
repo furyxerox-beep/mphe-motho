@@ -24,7 +24,7 @@ function MyProfile() {
     enabled: !!me,
     queryFn: async () => (await supabase.from("private_details").select("phone").eq("user_id", me!.id).maybeSingle()).data,
   });
-  const [f, setF] = useState({ display_name: "", birthdate: "", gender: "", interested_in: "", job: "", city: "", province: "", bio: "", interests: "", phone: "" });
+  const [f, setF] = useState({ display_name: "", birthdate: "", gender: "", interested_in: "", job: "", city: "", province: "", bio: "", interests: "", phone: "", facebook_url: "", tiktok_handle: "", whatsapp_number: "" });
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ function MyProfile() {
       setF({
         display_name: me.display_name, birthdate: me.birthdate ?? "", gender: me.gender ?? "", interested_in: me.interested_in ?? "",
         job: me.job ?? "", city: me.city ?? "", province: me.province ?? "", bio: me.bio ?? "", interests: me.interests.join(", "), phone: priv?.phone ?? "",
+        facebook_url: (me as any).facebook_url ?? "", tiktok_handle: (me as any).tiktok_handle ?? "", whatsapp_number: (me as any).whatsapp_number ?? "",
       });
   }, [me, priv]);
 
@@ -55,11 +56,18 @@ function MyProfile() {
     }
     const phone = normalizePhone(f.phone);
     if (!phone) { toast.error("Use a South African mobile number."); return; }
+    const wa = f.whatsapp_number.trim() ? normalizePhone(f.whatsapp_number) : "";
+    if (wa === null || wa === undefined) { toast.error("WhatsApp must be a South African number."); return; }
+    const fb = f.facebook_url.trim();
+    if (fb && !/^(https?:\/\/)?(www\.|m\.)?(facebook|fb)\.com\/[\w.\-/?=]+$/i.test(fb)) { toast.error("Use a facebook.com profile link."); return; }
+    const tt = f.tiktok_handle.trim().replace(/^@/, "").replace(/^https?:\/\/(www\.)?tiktok\.com\/@/i, "").split(/[/?]/)[0];
+    if (tt && !/^[\w.]{2,24}$/.test(tt)) { toast.error("Use a valid TikTok username."); return; }
     setSaving(true);
     const { error } = await supabase.from("profiles").update({
       display_name: f.display_name.trim() || "Member", birthdate: f.birthdate || null, gender: f.gender || null, interested_in: f.interested_in || null,
       job: f.job, city: f.city, province: f.province || null, bio: f.bio.slice(0, 600),
       interests: f.interests.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 10),
+      facebook_url: fb ? (fb.startsWith("http") ? fb : `https://${fb}`) : "", tiktok_handle: tt, whatsapp_number: wa || "",
     }).eq("id", me.id);
     const { error: e2 } = phone !== priv?.phone ? await supabase.from("private_details").update({ phone }).eq("user_id", me.id) : { error: null };
     setSaving(false);
@@ -100,6 +108,10 @@ function MyProfile() {
         <textarea className={field} rows={4} placeholder="Tell people about yourself…" value={f.bio} onChange={(e) => setF({ ...f, bio: e.target.value })} />
         <input className={field} placeholder="Interests, comma separated (Jazz, Hiking, Braai)" value={f.interests} onChange={(e) => setF({ ...f, interests: e.target.value })} />
         <label className="block text-xs text-cream/60">Mobile (private, never shown)<input type="tel" className={field} value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} /></label>
+        <SectionTitle>Link your socials (shown to matches only)</SectionTitle>
+        <input className={field} placeholder="Facebook profile link (facebook.com/…)" value={f.facebook_url} onChange={(e) => setF({ ...f, facebook_url: e.target.value })} />
+        <input className={field} placeholder="TikTok username (@…)" value={f.tiktok_handle} onChange={(e) => setF({ ...f, tiktok_handle: e.target.value })} />
+        <input type="tel" className={field} placeholder="WhatsApp number (+27…), optional" value={f.whatsapp_number} onChange={(e) => setF({ ...f, whatsapp_number: e.target.value })} />
         <button disabled={saving} className="w-full rounded-full bg-primary-gradient py-3 font-semibold text-cream shadow-glow">{saving ? "Saving…" : "Save profile"}</button>
       </form>
     </AppShell>
