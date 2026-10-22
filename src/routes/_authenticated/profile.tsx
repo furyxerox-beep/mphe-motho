@@ -24,7 +24,7 @@ function MyProfile() {
     enabled: !!me,
     queryFn: async () => (await supabase.from("private_details").select("phone").eq("user_id", me!.id).maybeSingle()).data,
   });
-  const [f, setF] = useState({ display_name: "", birthdate: "", gender: "", interested_in: "", job: "", city: "", province: "", bio: "", interests: "", phone: "", facebook_url: "", tiktok_handle: "", whatsapp_number: "" });
+  const [f, setF] = useState({ display_name: "", birthdate: "", gender: "", interested_in: "", job: "", city: "", province: "", bio: "", interests: "", phone: "", facebook_url: "", tiktok_handle: "", whatsapp_number: "", show_facebook: true, show_tiktok: true, show_whatsapp: true });
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function MyProfile() {
       setF({
         display_name: me.display_name, birthdate: me.birthdate ?? "", gender: me.gender ?? "", interested_in: me.interested_in ?? "",
         job: me.job ?? "", city: me.city ?? "", province: me.province ?? "", bio: me.bio ?? "", interests: me.interests.join(", "), phone: priv?.phone ?? "",
-        facebook_url: (me as any).facebook_url ?? "", tiktok_handle: (me as any).tiktok_handle ?? "", whatsapp_number: (me as any).whatsapp_number ?? "",
+        facebook_url: (me as any).facebook_url ?? "", tiktok_handle: (me as any).tiktok_handle ?? "", whatsapp_number: (me as any).whatsapp_number ?? "", show_facebook: (me as any).show_facebook ?? true, show_tiktok: (me as any).show_tiktok ?? true, show_whatsapp: (me as any).show_whatsapp ?? true,
       });
   }, [me, priv]);
 
@@ -67,7 +67,7 @@ function MyProfile() {
       display_name: f.display_name.trim() || "Member", birthdate: f.birthdate || null, gender: f.gender || null, interested_in: f.interested_in || null,
       job: f.job, city: f.city, province: f.province || null, bio: f.bio.slice(0, 600),
       interests: f.interests.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 10),
-      facebook_url: fb ? (fb.startsWith("http") ? fb : `https://${fb}`) : "", tiktok_handle: tt, whatsapp_number: wa || "",
+      facebook_url: fb ? (fb.startsWith("http") ? fb : `https://${fb}`) : "", tiktok_handle: tt, whatsapp_number: wa || "", show_facebook: f.show_facebook, show_tiktok: f.show_tiktok, show_whatsapp: f.show_whatsapp,
     }).eq("id", me.id);
     const { error: e2 } = phone !== priv?.phone ? await supabase.from("private_details").update({ phone }).eq("user_id", me.id) : { error: null };
     setSaving(false);
@@ -110,8 +110,11 @@ function MyProfile() {
         <label className="block text-xs text-cream/60">Mobile (private, never shown)<input type="tel" className={field} value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} /></label>
         <SectionTitle>Link your socials (shown to matches only)</SectionTitle>
         <input className={field} placeholder="Facebook profile link (facebook.com/…)" value={f.facebook_url} onChange={(e) => setF({ ...f, facebook_url: e.target.value })} />
+        <label className="flex items-center gap-2 text-xs text-cream/70"><input type="checkbox" checked={f.show_facebook} onChange={(e) => setF({ ...f, show_facebook: e.target.checked })} /> Show to my matches</label>
         <input className={field} placeholder="TikTok username (@…)" value={f.tiktok_handle} onChange={(e) => setF({ ...f, tiktok_handle: e.target.value })} />
+        <label className="flex items-center gap-2 text-xs text-cream/70"><input type="checkbox" checked={f.show_tiktok} onChange={(e) => setF({ ...f, show_tiktok: e.target.checked })} /> Show to my matches</label>
         <input type="tel" className={field} placeholder="WhatsApp number (+27…), optional" value={f.whatsapp_number} onChange={(e) => setF({ ...f, whatsapp_number: e.target.value })} />
+        <label className="flex items-center gap-2 text-xs text-cream/70"><input type="checkbox" checked={f.show_whatsapp} onChange={(e) => setF({ ...f, show_whatsapp: e.target.checked })} /> Show to my matches</label>
         <button disabled={saving} className="w-full rounded-full bg-primary-gradient py-3 font-semibold text-cream shadow-glow">{saving ? "Saving…" : "Save profile"}</button>
       </form>
     </AppShell>

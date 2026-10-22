@@ -43,6 +43,13 @@
       "when": 1792665453135,
       "tag": "0005_social_links",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792665601612,
+      "tag": "0006_social_visibility",
+      "breakpoints": true
     }
   ]
 }
