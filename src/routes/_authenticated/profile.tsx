@@ -60,7 +60,7 @@ function MyProfile() {
     if (wa === null || wa === undefined) { toast.error("WhatsApp must be a South African number."); return; }
     const fb = f.facebook_url.trim();
     if (fb && !/^(https?:\/\/)?(www\.|m\.)?(facebook|fb)\.com\/[\w.\-/?=]+$/i.test(fb)) { toast.error("Use a facebook.com profile link."); return; }
-    const tt = f.tiktok_handle.trim().replace(/^@/, "").replace(/^https?:\/\/(www\.)?tiktok\.com\/@/i, "").split(/[/?]/)[0];
+    const tt = f.tiktok_handle.trim().replace(/^@/, "").replace(/^https?:\/\/(www\.)?tiktok\.com\/@/i, "").split(/[/?]/)[0] ?? "";
     if (tt && !/^[\w.]{2,24}$/.test(tt)) { toast.error("Use a valid TikTok username."); return; }
     setSaving(true);
     const { error } = await supabase.from("profiles").update({
