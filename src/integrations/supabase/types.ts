@@ -569,6 +569,7 @@ export type Database = {
           city: string | null
           created_at: string
           display_name: string
+          facebook_url: string
           gender: string | null
           id: string
           interested_in: string | null
@@ -579,7 +580,9 @@ export type Database = {
           lat: number | null
           lng: number | null
           province: string | null
+          tiktok_handle: string
           umshado_intent: string | null
+          whatsapp_number: string
         }
         Insert: {
           avatar_path?: string | null
@@ -588,6 +591,7 @@ export type Database = {
           city?: string | null
           created_at?: string
           display_name?: string
+          facebook_url?: string
           gender?: string | null
           id: string
           interested_in?: string | null
@@ -598,7 +602,9 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           province?: string | null
+          tiktok_handle?: string
           umshado_intent?: string | null
+          whatsapp_number?: string
         }
         Update: {
           avatar_path?: string | null
@@ -607,6 +613,7 @@ export type Database = {
           city?: string | null
           created_at?: string
           display_name?: string
+          facebook_url?: string
           gender?: string | null
           id?: string
           interested_in?: string | null
@@ -617,7 +624,9 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           province?: string | null
+          tiktok_handle?: string
           umshado_intent?: string | null
+          whatsapp_number?: string
         }
         Relationships: []
       }

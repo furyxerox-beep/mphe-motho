@@ -73,6 +73,17 @@ function Person() {
               <Navigation className="h-4 w-4" /> Directions to their area
             </a>
           )}
+          {matched && (() => {
+            const s = p as { facebook_url?: string; tiktok_handle?: string; whatsapp_number?: string };
+            const cls = "flex-1 rounded-full border border-gold/50 py-2 text-center text-sm text-gold";
+            return (s.facebook_url || s.tiktok_handle || s.whatsapp_number) ? (
+              <div className="mt-3 flex gap-2">
+                {s.facebook_url && <a target="_blank" rel="noreferrer" href={s.facebook_url} className={cls}>Facebook</a>}
+                {s.tiktok_handle && <a target="_blank" rel="noreferrer" href={`https://www.tiktok.com/@${s.tiktok_handle}`} className={cls}>TikTok</a>}
+                {s.whatsapp_number && <a target="_blank" rel="noreferrer" href={`https://wa.me/${s.whatsapp_number.replace("+", "")}`} className={cls}>WhatsApp</a>}
+              </div>
+            ) : null;
+          })()}
         </div>
       </div>
       <section className="mt-4 rounded-2xl border border-gold/20 bg-card/10 p-5">
