@@ -580,6 +580,9 @@ export type Database = {
           lat: number | null
           lng: number | null
           province: string | null
+          show_facebook: boolean
+          show_tiktok: boolean
+          show_whatsapp: boolean
           tiktok_handle: string
           umshado_intent: string | null
           whatsapp_number: string
@@ -602,6 +605,9 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           province?: string | null
+          show_facebook?: boolean
+          show_tiktok?: boolean
+          show_whatsapp?: boolean
           tiktok_handle?: string
           umshado_intent?: string | null
           whatsapp_number?: string
@@ -624,6 +630,9 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           province?: string | null
+          show_facebook?: boolean
+          show_tiktok?: boolean
+          show_whatsapp?: boolean
           tiktok_handle?: string
           umshado_intent?: string | null
           whatsapp_number?: string
