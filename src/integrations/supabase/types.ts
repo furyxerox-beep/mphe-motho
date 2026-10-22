@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      blocks: {
+        Row: {
+          blocked: string
+          blocker: string
+          created_at: string
+        }
+        Insert: {
+          blocked: string
+          blocker: string
+          created_at?: string
+        }
+        Update: {
+          blocked?: string
+          blocker?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blocks_blocked_fkey"
+            columns: ["blocked"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocks_blocker_fkey"
+            columns: ["blocker"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       choma_vouches: {
         Row: {
           created_at: string
@@ -540,6 +573,7 @@ export type Database = {
           id: string
           interested_in: string | null
           interests: string[]
+          is_video_verified: boolean
           job: string | null
           last_active: string
           lat: number | null
@@ -558,6 +592,7 @@ export type Database = {
           id: string
           interested_in?: string | null
           interests?: string[]
+          is_video_verified?: boolean
           job?: string | null
           last_active?: string
           lat?: number | null
@@ -576,6 +611,7 @@ export type Database = {
           id?: string
           interested_in?: string | null
           interests?: string[]
+          is_video_verified?: boolean
           job?: string | null
           last_active?: string
           lat?: number | null
@@ -692,6 +728,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      is_blocked: { Args: { a: string; b: string }; Returns: boolean }
       is_match: { Args: { a: string; b: string }; Returns: boolean }
     }
     Enums: {
