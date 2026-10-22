@@ -41,6 +41,7 @@ function Person() {
         <div className="-mt-14 px-5 pb-5">
           <MemberPhoto path={p.avatar_path} name={p.display_name} className="h-28 w-28 rounded-full border-4 border-gold text-4xl" />
           <h1 className="mt-3 font-display text-2xl text-gold">{p.display_name}{age(p.birthdate) ? `, ${age(p.birthdate)}` : ""}</h1>
+          {(p as { is_video_verified?: boolean }).is_video_verified && <p className="text-xs font-semibold text-gold">✔ Video verified</p>}
           {p.job && <p className="flex items-center gap-1 text-sm text-cream/80"><Briefcase className="h-4 w-4" />{p.job}</p>}
           <p className="flex items-center gap-1 text-sm text-cream/70"><MapPin className="h-4 w-4" />{place || "Mzansi"}{dist != null && ` · ${Math.round(dist)} km away`}</p>
           <p className="mt-1 text-sm text-gold">{score}% compatible</p>
@@ -54,6 +55,19 @@ function Person() {
               </Link>
             )}
           </div>
+          <button
+            onClick={async () => {
+              if (!confirm(`Block ${p.display_name}? They won't be able to message or like you.`)) return;
+              const { error } = await supabase.from("blocks").insert({ blocker: me!.id, blocked: id });
+              if (error) { toast.error(error.message); return; }
+              await supabase.from("likes").delete().eq("liker", me!.id).eq("liked", id);
+              qc.invalidateQueries({ queryKey: ["likes"] });
+              toast.success("Blocked");
+            }}
+            className="mt-2 w-full text-center text-xs text-cream/60 underline"
+          >
+            Block this member
+          </button>
           {matched && place && (
             <a target="_blank" rel="noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place + ", South Africa")}`} className="mt-2 flex items-center justify-center gap-2 text-sm text-gold">
               <Navigation className="h-4 w-4" /> Directions to their area
