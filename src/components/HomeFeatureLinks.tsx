@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { Sun, Users, ShieldCheck, HeartHandshake, Music2, ArrowUpRight, Bus, Gem, Gift, Mic } from 'lucide-react';
+import { Sun, Users, ShieldCheck, HeartHandshake, Music2, ArrowUpRight, Bus, Gem, Gift, Mic, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const links = [
@@ -12,6 +12,7 @@ const links = [
   { to: '/umshado', label: 'Umshado Forecast', detail: 'Long-Term Intent', icon: Gem },
   { to: '/date-fund', label: 'The Date Fund', detail: 'Digital Gifting', icon: Gift },
   { to: '/voice-intro', label: 'Language Audio Bio', detail: 'Multilingual Voice', icon: Mic },
+  { to: '/icebreakers', label: 'AI Icebreakers', detail: 'Conversation Starters', icon: Sparkles },
 ] as const;
 
 export function HomeFeatureLinks() {
