@@ -22,6 +22,7 @@ import { Route as AuthenticatedDiscoverRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedEventsRouteImport } from './routes/_authenticated/events'
 import { Route as AuthenticatedGrooveMatchRouteImport } from './routes/_authenticated/groove-match'
 import { Route as AuthenticatedGroupDatesRouteImport } from './routes/_authenticated/group-dates'
+import { Route as AuthenticatedIcebreakersRouteImport } from './routes/_authenticated/icebreakers'
 import { Route as AuthenticatedLobolaRouteImport } from './routes/_authenticated/lobola'
 import { Route as AuthenticatedMatchCountdownRouteImport } from './routes/_authenticated/match-countdown'
 import { Route as AuthenticatedMatchesRouteImport } from './routes/_authenticated/matches'
@@ -101,6 +102,12 @@ const AuthenticatedGroupDatesRoute = AuthenticatedGroupDatesRouteImport.update({
   path: '/group-dates',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedIcebreakersRoute =
+  AuthenticatedIcebreakersRouteImport.update({
+    id: '/icebreakers',
+    path: '/icebreakers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLobolaRoute = AuthenticatedLobolaRouteImport.update({
   id: '/lobola',
   path: '/lobola',
@@ -173,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/events': typeof AuthenticatedEventsRoute
   '/groove-match': typeof AuthenticatedGrooveMatchRoute
   '/group-dates': typeof AuthenticatedGroupDatesRoute
+  '/icebreakers': typeof AuthenticatedIcebreakersRoute
   '/lobola': typeof AuthenticatedLobolaRoute
   '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
@@ -198,6 +206,7 @@ export interface FileRoutesByTo {
   '/events': typeof AuthenticatedEventsRoute
   '/groove-match': typeof AuthenticatedGrooveMatchRoute
   '/group-dates': typeof AuthenticatedGroupDatesRoute
+  '/icebreakers': typeof AuthenticatedIcebreakersRoute
   '/lobola': typeof AuthenticatedLobolaRoute
   '/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/matches': typeof AuthenticatedMatchesRoute
@@ -225,6 +234,7 @@ export interface FileRoutesById {
   '/_authenticated/events': typeof AuthenticatedEventsRoute
   '/_authenticated/groove-match': typeof AuthenticatedGrooveMatchRoute
   '/_authenticated/group-dates': typeof AuthenticatedGroupDatesRoute
+  '/_authenticated/icebreakers': typeof AuthenticatedIcebreakersRoute
   '/_authenticated/lobola': typeof AuthenticatedLobolaRoute
   '/_authenticated/match-countdown': typeof AuthenticatedMatchCountdownRoute
   '/_authenticated/matches': typeof AuthenticatedMatchesRoute
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/groove-match'
     | '/group-dates'
+    | '/icebreakers'
     | '/lobola'
     | '/match-countdown'
     | '/matches'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/groove-match'
     | '/group-dates'
+    | '/icebreakers'
     | '/lobola'
     | '/match-countdown'
     | '/matches'
@@ -303,6 +315,7 @@ export interface FileRouteTypes {
     | '/_authenticated/events'
     | '/_authenticated/groove-match'
     | '/_authenticated/group-dates'
+    | '/_authenticated/icebreakers'
     | '/_authenticated/lobola'
     | '/_authenticated/match-countdown'
     | '/_authenticated/matches'
@@ -416,6 +429,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGroupDatesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/icebreakers': {
+      id: '/_authenticated/icebreakers'
+      path: '/icebreakers'
+      fullPath: '/icebreakers'
+      preLoaderRoute: typeof AuthenticatedIcebreakersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/lobola': {
       id: '/_authenticated/lobola'
       path: '/lobola'
@@ -506,6 +526,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedEventsRoute: typeof AuthenticatedEventsRoute
   AuthenticatedGrooveMatchRoute: typeof AuthenticatedGrooveMatchRoute
   AuthenticatedGroupDatesRoute: typeof AuthenticatedGroupDatesRoute
+  AuthenticatedIcebreakersRoute: typeof AuthenticatedIcebreakersRoute
   AuthenticatedLobolaRoute: typeof AuthenticatedLobolaRoute
   AuthenticatedMatchCountdownRoute: typeof AuthenticatedMatchCountdownRoute
   AuthenticatedMatchesRoute: typeof AuthenticatedMatchesRoute
@@ -529,6 +550,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedEventsRoute: AuthenticatedEventsRoute,
   AuthenticatedGrooveMatchRoute: AuthenticatedGrooveMatchRoute,
   AuthenticatedGroupDatesRoute: AuthenticatedGroupDatesRoute,
+  AuthenticatedIcebreakersRoute: AuthenticatedIcebreakersRoute,
   AuthenticatedLobolaRoute: AuthenticatedLobolaRoute,
   AuthenticatedMatchCountdownRoute: AuthenticatedMatchCountdownRoute,
   AuthenticatedMatchesRoute: AuthenticatedMatchesRoute,
