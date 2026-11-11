@@ -1,8 +1,8 @@
-import { Heart, MapPin, PhoneCheck } from "lucide-react";
+import { Heart, MapPin, Phone } from "lucide-react";
 
 const steps = [
   {
-    icon: PhoneCheck,
+    icon: Phone,
     number: "01",
     title: "Start with your +27 number",
     text: "Create your 18+ account with a South African mobile number and email. Safety video submission is optional and does not itself verify identity.",
