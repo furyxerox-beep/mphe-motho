@@ -1,16 +1,25 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { ArrowLeft, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { normalizePhone, passwordIssues } from "@/lib/sa";
+import { normalizePhone, passwordIssues, PROVINCES } from "@/lib/sa";
 
 export const Route = createFileRoute("/auth")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    mode: search.mode === "up" ? ("up" as const) : undefined,
+    phone: typeof search.phone === "string" ? search.phone : undefined,
+    province: typeof search.province === "string" && PROVINCES.some((item) => item.name === search.province) ? search.province : undefined,
+    intent: typeof search.intent === "string" && ["Umshado", "Open", "Vibes"].includes(search.intent) ? search.intent : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Sign in — Mphe-Motho" },
       { name: "description", content: "Sign in or join Mphe-Motho, dating for South Africa." },
       { property: "og:title", content: "Sign in — Mphe-Motho" },
       { property: "og:description", content: "Join Mzansi's dating community." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,
@@ -20,10 +29,11 @@ const field = "w-full rounded-xl border border-gold/30 bg-card/20 px-4 py-3 text
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"in" | "up" | "forgot">("in");
+  const search = Route.useSearch();
+  const [mode, setMode] = useState<"in" | "up" | "forgot">(search.mode === "up" ? "up" : "in");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
-  const [f, setF] = useState({ name: "", email: "", phone: "", password: "", adult: false });
+  const [f, setF] = useState({ name: "", email: "", phone: search.phone ?? "", password: "", adult: false });
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => data.user && navigate({ to: "/discover" }));
@@ -52,7 +62,7 @@ function AuthPage() {
         const { error } = await supabase.auth.signUp({
           email: f.email.trim(),
           password: f.password,
-          options: { emailRedirectTo: `${window.location.origin}/profile`, data: { display_name: f.name.trim(), phone } },
+          options: { emailRedirectTo: `${window.location.origin}/profile`, data: { display_name: f.name.trim(), phone, province: search.province ?? null, preview_intent: search.intent ?? null } },
         });
         if (error) throw error;
         setSent(true);
@@ -67,6 +77,7 @@ function AuthPage() {
   return (
     <div className="min-h-screen bg-romance">
       <div className="mx-auto max-w-md px-6 py-12">
+        <Link to="/" className="mb-8 inline-flex items-center gap-2 text-sm text-cream/60 hover:text-gold"><ArrowLeft className="h-4 w-4" />Back to home</Link>
         <h1 className="text-center font-display text-4xl text-gold-gradient">Mphe-Motho</h1>
         <p className="mt-1 text-center text-sm text-cream/70">Dating for Mzansi 🇿🇦</p>
         {sent ? (
@@ -77,6 +88,7 @@ function AuthPage() {
         ) : (
           <form onSubmit={submit} className="mt-10 space-y-4 rounded-3xl border border-gold/30 bg-card/10 p-6 shadow-glow">
             <h2 className="font-display text-2xl text-cream">{mode === "in" ? "Welcome back" : mode === "up" ? "Create your profile" : "Reset password"}</h2>
+            {mode === "up" && (search.province || search.intent) && <p className="flex items-center gap-2 rounded-xl bg-gold/10 px-3 py-2 text-xs text-gold"><MapPin className="h-4 w-4" />Your preview choices: {[search.province, search.intent].filter(Boolean).join(" · ")}</p>}
             {mode === "up" && <input className={field} placeholder="Full name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} />}
             <input className={field} type="email" required placeholder="Email address" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} />
             {mode === "up" && (

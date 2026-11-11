@@ -12,7 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SafetyRouteImport } from './routes/safety'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedChomaRouteImport } from './routes/_authenticated/choma'
 import { Route as AuthenticatedConfessionsRouteImport } from './routes/_authenticated/confessions'
 import { Route as AuthenticatedDateFundRouteImport } from './routes/_authenticated/date-fund'
@@ -31,6 +36,7 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedSafetyShieldRouteImport } from './routes/_authenticated/safety-shield'
 import { Route as AuthenticatedUmshadoRouteImport } from './routes/_authenticated/umshado'
 import { Route as AuthenticatedVoiceIntroRouteImport } from './routes/_authenticated/voice-intro'
+import { Route as ProvincesProvinceRouteImport } from './routes/provinces.$province'
 import { Route as AuthenticatedMessagesIndexRouteImport } from './routes/_authenticated/messages.index'
 import { Route as AuthenticatedMessagesIdRouteImport } from './routes/_authenticated/messages.$id'
 import { Route as AuthenticatedPeopleIdRouteImport } from './routes/_authenticated/people.$id'
@@ -49,9 +55,34 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedChomaRoute = AuthenticatedChomaRouteImport.update({
@@ -150,6 +181,11 @@ const AuthenticatedVoiceIntroRoute = AuthenticatedVoiceIntroRouteImport.update({
   path: '/voice-intro',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ProvincesProvinceRoute = ProvincesProvinceRouteImport.update({
+  id: '/provinces/$province',
+  path: '/provinces/$province',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedMessagesIndexRoute =
   AuthenticatedMessagesIndexRouteImport.update({
     id: '/messages/',
@@ -170,7 +206,12 @@ const AuthenticatedPeopleIdRoute = AuthenticatedPeopleIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/features': typeof FeaturesRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/choma': typeof AuthenticatedChomaRoute
   '/confessions': typeof AuthenticatedConfessionsRoute
   '/date-fund': typeof AuthenticatedDateFundRoute
@@ -189,6 +230,7 @@ export interface FileRoutesByFullPath {
   '/safety-shield': typeof AuthenticatedSafetyShieldRoute
   '/umshado': typeof AuthenticatedUmshadoRoute
   '/voice-intro': typeof AuthenticatedVoiceIntroRoute
+  '/provinces/$province': typeof ProvincesProvinceRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
   '/messages/': typeof AuthenticatedMessagesIndexRoute
@@ -196,7 +238,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/features': typeof FeaturesRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/choma': typeof AuthenticatedChomaRoute
   '/confessions': typeof AuthenticatedConfessionsRoute
   '/date-fund': typeof AuthenticatedDateFundRoute
@@ -215,6 +262,7 @@ export interface FileRoutesByTo {
   '/safety-shield': typeof AuthenticatedSafetyShieldRoute
   '/umshado': typeof AuthenticatedUmshadoRoute
   '/voice-intro': typeof AuthenticatedVoiceIntroRoute
+  '/provinces/$province': typeof ProvincesProvinceRoute
   '/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/people/$id': typeof AuthenticatedPeopleIdRoute
   '/messages': typeof AuthenticatedMessagesIndexRoute
@@ -224,7 +272,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/features': typeof FeaturesRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/_authenticated/choma': typeof AuthenticatedChomaRoute
   '/_authenticated/confessions': typeof AuthenticatedConfessionsRoute
   '/_authenticated/date-fund': typeof AuthenticatedDateFundRoute
@@ -243,6 +296,7 @@ export interface FileRoutesById {
   '/_authenticated/safety-shield': typeof AuthenticatedSafetyShieldRoute
   '/_authenticated/umshado': typeof AuthenticatedUmshadoRoute
   '/_authenticated/voice-intro': typeof AuthenticatedVoiceIntroRoute
+  '/provinces/$province': typeof ProvincesProvinceRoute
   '/_authenticated/messages/$id': typeof AuthenticatedMessagesIdRoute
   '/_authenticated/people/$id': typeof AuthenticatedPeopleIdRoute
   '/_authenticated/messages/': typeof AuthenticatedMessagesIndexRoute
@@ -252,7 +306,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/features'
+    | '/how-it-works'
+    | '/privacy'
     | '/reset-password'
+    | '/safety'
+    | '/terms'
     | '/choma'
     | '/confessions'
     | '/date-fund'
@@ -271,6 +330,7 @@ export interface FileRouteTypes {
     | '/safety-shield'
     | '/umshado'
     | '/voice-intro'
+    | '/provinces/$province'
     | '/messages/$id'
     | '/people/$id'
     | '/messages/'
@@ -278,7 +338,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/features'
+    | '/how-it-works'
+    | '/privacy'
     | '/reset-password'
+    | '/safety'
+    | '/terms'
     | '/choma'
     | '/confessions'
     | '/date-fund'
@@ -297,6 +362,7 @@ export interface FileRouteTypes {
     | '/safety-shield'
     | '/umshado'
     | '/voice-intro'
+    | '/provinces/$province'
     | '/messages/$id'
     | '/people/$id'
     | '/messages'
@@ -305,7 +371,12 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/features'
+    | '/how-it-works'
+    | '/privacy'
     | '/reset-password'
+    | '/safety'
+    | '/terms'
     | '/_authenticated/choma'
     | '/_authenticated/confessions'
     | '/_authenticated/date-fund'
@@ -324,6 +395,7 @@ export interface FileRouteTypes {
     | '/_authenticated/safety-shield'
     | '/_authenticated/umshado'
     | '/_authenticated/voice-intro'
+    | '/provinces/$province'
     | '/_authenticated/messages/$id'
     | '/_authenticated/people/$id'
     | '/_authenticated/messages/'
@@ -333,7 +405,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  FeaturesRoute: typeof FeaturesRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SafetyRoute: typeof SafetyRoute
+  TermsRoute: typeof TermsRoute
+  ProvincesProvinceRoute: typeof ProvincesProvinceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -359,11 +437,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/choma': {
@@ -492,6 +605,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVoiceIntroRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/provinces/$province': {
+      id: '/provinces/$province'
+      path: '/provinces/$province'
+      fullPath: '/provinces/$province'
+      preLoaderRoute: typeof ProvincesProvinceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/messages/': {
       id: '/_authenticated/messages/'
       path: '/messages'
@@ -571,7 +691,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  FeaturesRoute: FeaturesRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SafetyRoute: SafetyRoute,
+  TermsRoute: TermsRoute,
+  ProvincesProvinceRoute: ProvincesProvinceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

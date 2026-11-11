@@ -1,16 +1,5 @@
 # Roadmap
-- [ ] Add Confessions, Umshado, Date Fund, language audio bio
-- [ ] Add five home buttons and working holiday, group-date, safety, milestone, and music pages
-- [ ] Verify saved new-feature data and home navigation
-- [ ] Add Lobola preferences and compatibility page
-- [ ] Add live Choma friend vouches
-- [ ] Add saved date invitations with accept/decline
-- [ ] Add seven-second voice introductions
-- [ ] Add enforced 48-hour match expiry and countdowns
-- [ ] Verify new member flows and feature navigation
-- [ ] Strong sign-up/login (email + SA phone, strong password)
-- [ ] Member profiles + preferences saved in Cloud (Facebook-style profile pages)
-- [ ] Auto-locate (Mzansi only) + auto-match by distance & interests
-- [ ] Real-time likes/matches
-- [ ] Real-time messaging between matches, history restored
-- [ ] Events RSVP live
+- [ ] Build the warm modern landing page with sticky navigation, phone entry, feature grid, steps, stories and footer
+- [ ] Add the province, intent, profile, audio and icebreaker discovery preview leading into sign-up
+- [ ] Add public feature, how-it-works, safety, privacy, terms and province pages with metadata
+- [ ] Verify the responsive preview flow, public navigation and sign-up handoff

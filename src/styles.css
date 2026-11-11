@@ -33,11 +33,21 @@
   --color-gold: var(--gold);
   --color-cream: var(--cream);
   --color-wine: var(--wine);
+  --color-ink: var(--ink);
+  --color-sunset: var(--sunset);
+  --color-terra: var(--terra);
+  --color-paper: var(--paper);
+  --color-sand: var(--sand);
 }
 
 :root {
   --radius: 0.75rem;
   --wine: oklch(0.2 0.07 15);
+  --ink: oklch(0.19 0.015 55);
+  --sunset: oklch(0.84 0.14 78);
+  --terra: oklch(0.59 0.17 34);
+  --paper: oklch(0.985 0.008 80);
+  --sand: oklch(0.93 0.035 78);
   --gold: oklch(0.82 0.12 80);
   --cream: oklch(0.96 0.02 60);
   --background: oklch(0.2 0.07 15);
@@ -96,4 +106,27 @@
 }
 @utility shadow-gold {
   box-shadow: 0 0 20px oklch(0.82 0.12 80 / 50%);
+}
+@utility bg-landing-glow {
+  background:
+    radial-gradient(circle at 82% 18%, color-mix(in oklab, var(--terra) 38%, transparent), transparent 38%),
+    radial-gradient(circle at 12% 88%, color-mix(in oklab, var(--sunset) 12%, transparent), transparent 42%),
+    var(--ink);
+}
+@utility bg-sunset-gradient {
+  background: linear-gradient(135deg, color-mix(in oklab, var(--sunset) 90%, var(--paper)), var(--sunset));
+}
+@utility shadow-card {
+  box-shadow: 0 20px 55px -30px oklch(0.19 0.015 55 / 35%);
+}
+@utility audio-wave {
+  animation: audio-wave 650ms ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes audio-wave {
+  from { transform: scaleY(0.45); }
+  to { transform: scaleY(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .audio-wave { animation: none; }
 }
